@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getBlogPosts } from "../../lib/contentful";
+
+let posts: any[] = [];
+let error: string | null = null;
+
+try {
+  posts = await getBlogPosts();
+} catch (e) {
+  error = "Blog posts could not be loaded.";
+  console.error("Failed to fetch blog posts:", e);
+}
+---
+
+<BaseLayout title="Blog" description="Latest news, guides, and updates from ContactFormAPI.">
+  <section class="py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-surface-900 sm:text-5xl">Blog</h1>
+        <p class="mt-4 text-lg text-surface-500">Guides, updates, and best practices for form handling.</p>
+      </div>
+
+      {error && (
+        <div class="mx-auto mt-10 max-w-md rounded-xl border border-amber-200 bg-amber-50 p-4 text-center text-sm text-amber-800">
+          {error}
+        </div>
+      )}
+
+      {posts.length > 0 ? (
+        <div class="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-2">
+          {posts.map((post: any) => {
+            const f = post.fields as any;
+            return (
+              <a
+                href={`/blog/${f.slug}`}
+                class="group overflow-hidden rounded-2xl border border-surface-200 bg-white transition-all hover:border-primary-200 hover:shadow-lg"
+              >
+                {f.featuredImage && (
+                  <div class="aspect-video overflow-hidden bg-surface-100">
+                    <img
+                      src={`https:${f.featuredImage.fields.file.url}?w=600&h=340&fit=fill`}
+                      alt={f.featuredImage.fields.title || ""}
+                      class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="p-6">
+                  <time class="text-xs font-medium text-surface-400">
+                    {new Date(f.publishedDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  <h2 class="mt-2 text-xl font-bold text-surface-900 group-hover:text-primary-600">
+                    {f.title}
+                  </h2>
+                  <p class="mt-2 text-sm leading-relaxed text-surface-500 line-clamp-3">
+                    {f.excerpt}
+                  </p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : !error && (
+        <div class="mx-auto mt-16 max-w-md text-center">
+          <p class="text-surface-500">No blog posts yet. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

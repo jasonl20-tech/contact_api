@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getBlogPostBySlug } from "../../lib/contentful";
+import { renderRichText } from "../../lib/rich-text";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/blog");
+}
+
+const post = await getBlogPostBySlug(slug);
+
+if (!post) {
+  return Astro.redirect("/blog");
+}
+
+const fields = post.fields as any;
+const htmlContent = renderRichText(fields.body);
+---
+
+<BaseLayout
+  title={fields.seoTitle || fields.title}
+  description={fields.seoDescription || fields.excerpt}
+>
+  <article class="py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <a href="/blog" class="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+      <header class="mb-10">
+        <time class="text-sm font-medium text-surface-400">
+          {new Date(fields.publishedDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-surface-900 sm:text-4xl">
+          {fields.title}
+        </h1>
+        {fields.author && (
+          <p class="mt-3 text-sm text-surface-500">By {fields.author}</p>
+        )}
+      </header>
+
+      {fields.featuredImage && (
+        <img
+          src={`https:${fields.featuredImage.fields.file.url}?w=800`}
+          alt={fields.featuredImage.fields.title || ""}
+          class="mb-10 w-full rounded-2xl"
+          loading="lazy"
+        />
+      )}
+
+      <div class="prose max-w-none" set:html={htmlContent} />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPageBySlug } from "../lib/contentful";
+import { renderRichText } from "../lib/rich-text";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/");
+}
+
+const reservedSlugs = ["pricing", "blog"];
+if (reservedSlugs.includes(slug)) {
+  return Astro.redirect(`/${slug}`);
+}
+
+const page = await getPageBySlug(slug);
+
+if (!page) {
+  return new Response(null, { status: 404, statusText: "Not Found" });
+}
+
+const fields = page.fields as any;
+const htmlContent = renderRichText(fields.body);
+---
+
+<BaseLayout
+  title={fields.seoTitle || fields.title}
+  description={fields.seoDescription || fields.description}
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h1 class="mb-8 text-3xl font-extrabold tracking-tight text-surface-900 sm:text-4xl">
+        {fields.title}
+      </h1>
+      <div class="prose max-w-none" set:html={htmlContent} />
+    </div>
+  </section>
+</BaseLayout>
