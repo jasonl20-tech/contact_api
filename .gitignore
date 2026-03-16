@@ -4,7 +4,6 @@ dist/
 .env
 .wrangler/
 .dev.vars
-wrangler.toml
 
 # OS files
 .DS_Store
