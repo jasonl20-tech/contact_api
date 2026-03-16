@@ -13,10 +13,22 @@ interface PolarListResponse {
   result?: {
     items?: PolarProduct[];
   };
+  data?: PolarProduct[];
   pagination?: {
     next_cursor?: string | null;
   };
   next_cursor?: string | null;
+}
+
+function extractProducts(payload: unknown): PolarProduct[] {
+  if (Array.isArray(payload)) return payload as PolarProduct[];
+  if (!payload || typeof payload !== "object") return [];
+
+  const p = payload as PolarListResponse;
+  if (Array.isArray(p.items)) return p.items;
+  if (Array.isArray(p.result?.items)) return p.result.items;
+  if (Array.isArray(p.data)) return p.data;
+  return [];
 }
 
 export interface PolarPrice {
@@ -41,7 +53,7 @@ export async function getProducts(): Promise<PolarProduct[]> {
   if (!token || !orgId) return [];
 
   // Build-time fetch for static pricing page.
-  // We fetch recurring subscription products and follow pagination.
+  // We fetch all active products and then detect subscriptions locally.
   const products: PolarProduct[] = [];
   let cursor: string | null = null;
   let pageGuard = 0;
@@ -50,7 +62,6 @@ export async function getProducts(): Promise<PolarProduct[]> {
     const url = new URL("https://api.polar.sh/v1/products/");
     url.searchParams.set("organization_id", orgId);
     url.searchParams.set("is_archived", "false");
-    url.searchParams.set("is_recurring", "true");
     url.searchParams.set("limit", "100");
     if (cursor) url.searchParams.set("cursor", cursor);
 
@@ -67,7 +78,7 @@ export async function getProducts(): Promise<PolarProduct[]> {
     }
 
     const data = (await response.json()) as PolarListResponse;
-    const pageItems = data.items ?? data.result?.items ?? [];
+    const pageItems = extractProducts(data);
     products.push(...pageItems);
 
     cursor = data.pagination?.next_cursor ?? data.next_cursor ?? null;
@@ -75,7 +86,11 @@ export async function getProducts(): Promise<PolarProduct[]> {
     pageGuard += 1;
   }
 
-  return products;
+  const recurring = products.filter(
+    (p) => p.is_recurring || p.prices?.some((price) => price.type === "recurring")
+  );
+
+  return recurring.length > 0 ? recurring : products;
 }
 
 export function formatPrice(price: PolarPrice): string {
