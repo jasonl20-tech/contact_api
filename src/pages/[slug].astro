@@ -5,37 +5,30 @@ import { renderRichText } from "../lib/rich-text";
 
 export async function getStaticPaths() {
   let pages: any[] = [];
-  try {
-    pages = await getPages();
-  } catch {
-    return [];
-  }
-  return pages.map((page: any) => ({
-    params: { slug: page.fields.slug },
-  }));
+  try { pages = await getPages(); } catch { return []; }
+  return pages.map((p: any) => ({ params: { slug: p.fields.slug } }));
 }
 
 const { slug } = Astro.params;
 const page = await getPageBySlug(slug!);
+if (!page) return Astro.redirect("/");
 
-if (!page) {
-  return Astro.redirect("/");
-}
-
-const fields = page.fields as any;
-const htmlContent = renderRichText(fields.body);
+const f = page.fields as any;
+const html = renderRichText(f.body);
 ---
 
-<BaseLayout
-  title={fields.seoTitle || fields.title}
-  description={fields.seoDescription || fields.description}
->
-  <section class="py-16 sm:py-24">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h1 class="mb-8 text-3xl font-extrabold tracking-tight text-surface-900 sm:text-4xl">
-        {fields.title}
+<BaseLayout title={f.seoTitle || f.title} description={f.seoDescription || f.description}>
+  <section class="bg-navy-950 pt-32 pb-16 sm:pt-40 sm:pb-20">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 text-center">
+      <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        {f.title}
       </h1>
-      <div class="prose max-w-none" set:html={htmlContent} />
+    </div>
+  </section>
+
+  <section class="bg-white py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <div class="prose prose-slate prose-lg max-w-none" set:html={html} />
     </div>
   </section>
 </BaseLayout>

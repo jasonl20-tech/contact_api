@@ -13,51 +13,56 @@ try {
 }
 ---
 
-<BaseLayout title="Blog" description="Latest news, guides, and updates from ContactFormAPI.">
-  <section class="py-20 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-4xl font-extrabold tracking-tight text-surface-900 sm:text-5xl">Blog</h1>
-        <p class="mt-4 text-lg text-surface-500">Guides, updates, and best practices for form handling.</p>
-      </div>
+<BaseLayout title="Blog" description="Guides, updates, and best practices from ContactFormAPI.">
+  <section class="bg-navy-950 pt-32 pb-16 sm:pt-40 sm:pb-20">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 text-center">
+      <p class="text-sm font-semibold uppercase tracking-widest text-amber-400">Blog</p>
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+        Guides & Updates
+      </h1>
+      <p class="mx-auto mt-4 max-w-lg text-lg text-slate-400">
+        Tips, tutorials, and news about form handling.
+      </p>
+    </div>
+  </section>
 
+  <section class="bg-white py-16 sm:py-24">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
       {error && (
-        <div class="mx-auto mt-10 max-w-md rounded-xl border border-amber-200 bg-amber-50 p-4 text-center text-sm text-amber-800">
+        <div class="mx-auto mb-8 max-w-md rounded-xl border border-amber-200 bg-amber-50 p-4 text-center text-sm text-amber-800">
           {error}
         </div>
       )}
 
       {posts.length > 0 ? (
-        <div class="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-2">
+        <div class="grid gap-8 md:grid-cols-2">
           {posts.map((post: any) => {
             const f = post.fields as any;
             return (
               <a
                 href={`/blog/${f.slug}`}
-                class="group overflow-hidden rounded-2xl border border-surface-200 bg-white transition-all hover:border-primary-200 hover:shadow-lg"
+                class="group overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-amber-100/30"
               >
                 {f.featuredImage && (
-                  <div class="aspect-video overflow-hidden bg-surface-100">
+                  <div class="aspect-video overflow-hidden bg-slate-50">
                     <img
                       src={`https:${f.featuredImage.fields.file.url}?w=600&h=340&fit=fill`}
                       alt={f.featuredImage.fields.title || ""}
-                      class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                   </div>
                 )}
                 <div class="p-6">
-                  <time class="text-xs font-medium text-surface-400">
+                  <time class="text-xs font-semibold uppercase tracking-wider text-amber-600">
                     {new Date(f.publishedDate).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
+                      year: "numeric", month: "long", day: "numeric",
                     })}
                   </time>
-                  <h2 class="mt-2 text-xl font-bold text-surface-900 group-hover:text-primary-600">
+                  <h2 class="mt-2 text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
                     {f.title}
                   </h2>
-                  <p class="mt-2 text-sm leading-relaxed text-surface-500 line-clamp-3">
+                  <p class="mt-2 text-sm leading-relaxed text-slate-500 line-clamp-3">
                     {f.excerpt}
                   </p>
                 </div>
@@ -66,8 +71,8 @@ try {
           })}
         </div>
       ) : !error && (
-        <div class="mx-auto mt-16 max-w-md text-center">
-          <p class="text-surface-500">No blog posts yet. Check back soon!</p>
+        <div class="text-center py-12">
+          <p class="text-slate-400 text-lg">No blog posts yet. Check back soon!</p>
         </div>
       )}
     </div>

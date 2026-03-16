@@ -3,138 +3,164 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const features = [
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>`,
+    icon: "mail",
     title: "Form to Email",
-    description:
-      "Every submission lands directly in your inbox. No dashboard required — but you get one anyway.",
+    desc: "Every submission delivered straight to your inbox. Customizable email templates with your branding.",
   },
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>`,
-    title: "Zero Backend Code",
-    description:
-      "Just point your form's action attribute to your endpoint. Works with any HTML form, any framework.",
+    icon: "code",
+    title: "Zero Backend",
+    desc: "Point your HTML form action to our endpoint. That's it. Works with any site, any framework, any stack.",
   },
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>`,
+    icon: "shield",
     title: "Spam Protection",
-    description:
-      "Built-in support for Turnstile, reCAPTCHA, hCaptcha, and Botpoison. Keep your inbox clean.",
+    desc: "Built-in Turnstile, reCAPTCHA, hCaptcha and Botpoison. Keep bots out without annoying your users.",
   },
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>`,
-    title: "Integrations",
-    description:
-      "Connect to Slack, Zapier, Make, webhooks, and more. Automate your workflow in minutes.",
+    icon: "zap",
+    title: "Webhooks & Integrations",
+    desc: "Connect to Slack, Zapier, Make, or your own webhooks. Automate workflows in minutes.",
   },
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" /></svg>`,
-    title: "Analytics Dashboard",
-    description:
-      "Track submissions, view trends, and export data as CSV or JSON. All from one dashboard.",
+    icon: "chart",
+    title: "Dashboard & Analytics",
+    desc: "Track submissions, spot trends, export as CSV or JSON. Everything in one clean dashboard.",
   },
   {
-    icon: `<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>`,
-    title: "Team Collaboration",
-    description:
-      "Invite team members, manage permissions, and share form endpoints across your organization.",
+    icon: "users",
+    title: "Team Workspaces",
+    desc: "Invite members, manage permissions, share endpoints. Built for teams of any size.",
   },
 ];
 
-const platforms = [
-  "HTML", "React", "Next.js", "Vue", "Nuxt", "Svelte", "Astro",
-  "WordPress", "Webflow", "Framer", "Hugo", "Jekyll",
+const icons: Record<string, string> = {
+  mail: '<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />',
+  code: '<path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />',
+  shield: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />',
+  zap: '<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />',
+  chart: '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />',
+  users: '<path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />',
+};
+
+const steps = [
+  { num: "01", title: "Create an endpoint", desc: "Sign up, create a form — get a unique URL in seconds." },
+  { num: "02", title: "Add to your form", desc: "Set the action attribute. No JavaScript, no SDK, no build step." },
+  { num: "03", title: "Receive submissions", desc: "Email, Slack, webhooks, dashboard — you choose how." },
 ];
+
+const platforms = ["HTML", "React", "Next.js", "Vue", "Nuxt", "Svelte", "Astro", "WordPress", "Webflow", "Framer", "Hugo", "Gatsby"];
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Home" dark={true}>
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50/50 to-white"></div>
-    <div class="mx-auto max-w-6xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32">
+  <section class="relative overflow-hidden bg-navy-950 pt-32 pb-24 sm:pt-40 sm:pb-32">
+    <!-- Grid pattern background -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(251,191,36,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(251,191,36,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+    <!-- Radial glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-[900px] bg-amber-500/5 rounded-full blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
       <div class="mx-auto max-w-3xl text-center">
-        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 text-sm font-medium text-primary-700">
-          <span class="relative flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
-          </span>
-          Now with Cloudflare Turnstile support
+        <div class="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-sm font-medium text-amber-400">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          Now with Cloudflare Turnstile
         </div>
 
-        <h1 class="text-4xl font-extrabold tracking-tight text-surface-900 sm:text-5xl lg:text-6xl">
-          Connect your forms
-          <span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
-            to your inbox
+        <h1 class="text-5xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl">
+          Your forms,
+          <br />
+          <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
+            delivered.
           </span>
         </h1>
 
-        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-surface-500 sm:text-xl">
-          Keep full control over the look and feel of your forms.
-          Let ContactFormAPI handle submissions, spam filtering, and notifications.
+        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-400">
+          A form backend that handles submissions, spam filtering, and notifications — so you never have to build one again.
         </p>
 
         <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
             href="https://app.contactformapi.com/register"
-            class="inline-flex w-full items-center justify-center rounded-xl bg-primary-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary-600/25 transition-all hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/30 sm:w-auto"
+            class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-7 py-3.5 text-[15px] font-semibold text-navy-950 shadow-xl shadow-amber-500/20 transition-all hover:bg-amber-400 hover:shadow-2xl hover:shadow-amber-500/30 sm:w-auto"
           >
             Start for free
-            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
           </a>
           <a
-            href="/docs"
-            class="inline-flex w-full items-center justify-center rounded-xl border border-surface-300 bg-white px-8 py-3.5 text-base font-semibold text-surface-700 transition-all hover:border-surface-400 hover:bg-surface-50 sm:w-auto"
+            href="#how-it-works"
+            class="inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 px-7 py-3.5 text-[15px] font-semibold text-white transition-all hover:bg-white/10 sm:w-auto"
           >
-            View docs
+            See how it works
           </a>
         </div>
 
-        <p class="mt-5 text-sm text-surface-400">No credit card required</p>
+        <p class="mt-5 text-xs text-slate-500">No credit card required &middot; Free tier included</p>
       </div>
 
-      <!-- Code example -->
-      <div class="mx-auto mt-16 max-w-2xl">
-        <div class="overflow-hidden rounded-2xl border border-surface-200 bg-surface-900 shadow-2xl">
-          <div class="flex items-center gap-2 border-b border-surface-700 px-4 py-3">
-            <span class="h-3 w-3 rounded-full bg-red-400"></span>
-            <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
-            <span class="h-3 w-3 rounded-full bg-green-400"></span>
-            <span class="ml-3 text-xs text-surface-400">contact.html</span>
+      <!-- Code Preview -->
+      <div class="mx-auto mt-20 max-w-2xl">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-1 shadow-2xl shadow-black/40 backdrop-blur">
+          <div class="rounded-xl bg-navy-900 overflow-hidden">
+            <div class="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+              <span class="h-3 w-3 rounded-full bg-white/10"></span>
+              <span class="h-3 w-3 rounded-full bg-white/10"></span>
+              <span class="h-3 w-3 rounded-full bg-white/10"></span>
+              <span class="ml-3 text-xs font-mono text-slate-500">contact.html</span>
+            </div>
+            <pre class="overflow-x-auto px-6 py-5 text-[13px] leading-relaxed font-mono"><code><span class="text-slate-500">&lt;</span><span class="text-amber-400">form</span> <span class="text-slate-300">action</span><span class="text-slate-500">=</span><span class="text-emerald-400">"https://api.contactformapi.com/f/YOUR_ID"</span>
+      <span class="text-slate-300">method</span><span class="text-slate-500">=</span><span class="text-emerald-400">"POST"</span><span class="text-slate-500">&gt;</span>
+
+  <span class="text-slate-500">&lt;</span><span class="text-amber-400">input</span> <span class="text-slate-300">type</span><span class="text-slate-500">=</span><span class="text-emerald-400">"email"</span> <span class="text-slate-300">name</span><span class="text-slate-500">=</span><span class="text-emerald-400">"email"</span> <span class="text-slate-300">required</span> <span class="text-slate-500">/&gt;</span>
+  <span class="text-slate-500">&lt;</span><span class="text-amber-400">textarea</span> <span class="text-slate-300">name</span><span class="text-slate-500">=</span><span class="text-emerald-400">"message"</span><span class="text-slate-500">&gt;&lt;/</span><span class="text-amber-400">textarea</span><span class="text-slate-500">&gt;</span>
+  <span class="text-slate-500">&lt;</span><span class="text-amber-400">button</span> <span class="text-slate-300">type</span><span class="text-slate-500">=</span><span class="text-emerald-400">"submit"</span><span class="text-slate-500">&gt;</span><span class="text-white">Send</span><span class="text-slate-500">&lt;/</span><span class="text-amber-400">button</span><span class="text-slate-500">&gt;</span>
+
+<span class="text-slate-500">&lt;/</span><span class="text-amber-400">form</span><span class="text-slate-500">&gt;</span></code></pre>
           </div>
-          <pre class="overflow-x-auto p-6 text-sm leading-relaxed"><code class="text-surface-300"><span class="text-pink-400">&lt;form</span> <span class="text-sky-400">action</span>=<span class="text-emerald-400">"https://api.contactformapi.com/f/YOUR_FORM_ID"</span>
-      <span class="text-sky-400">method</span>=<span class="text-emerald-400">"POST"</span><span class="text-pink-400">&gt;</span>
-
-  <span class="text-pink-400">&lt;input</span> <span class="text-sky-400">type</span>=<span class="text-emerald-400">"email"</span> <span class="text-sky-400">name</span>=<span class="text-emerald-400">"email"</span> <span class="text-sky-400">required</span> <span class="text-pink-400">/&gt;</span>
-  <span class="text-pink-400">&lt;textarea</span> <span class="text-sky-400">name</span>=<span class="text-emerald-400">"message"</span> <span class="text-sky-400">required</span><span class="text-pink-400">&gt;&lt;/textarea&gt;</span>
-  <span class="text-pink-400">&lt;button</span> <span class="text-sky-400">type</span>=<span class="text-emerald-400">"submit"</span><span class="text-pink-400">&gt;</span>Send<span class="text-pink-400">&lt;/button&gt;</span>
-
-<span class="text-pink-400">&lt;/form&gt;</span></code></pre>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Trusted by -->
+  <section class="border-t border-white/5 bg-navy-950 py-12">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <p class="text-center text-xs font-medium uppercase tracking-widest text-slate-500">Works with every platform</p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        {platforms.map((p) => (
+          <span class="rounded-full border border-white/5 bg-white/[0.03] px-4 py-1.5 text-xs font-medium text-slate-400">
+            {p}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section id="features" class="border-t border-surface-100 bg-white py-20 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+  <section id="features" class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-surface-900 sm:text-4xl">
-          Everything you need. Nothing you don't.
+        <p class="text-sm font-semibold uppercase tracking-widest text-amber-600">Features</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Everything you need to collect form data
         </h2>
-        <p class="mt-4 text-lg text-surface-500">
-          A complete form backend that stays out of your way.
+        <p class="mt-4 text-lg text-slate-500">
+          No servers. No databases. No maintenance. Just plug in and go.
         </p>
       </div>
 
-      <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div class="group rounded-2xl border border-surface-200 bg-white p-6 transition-all hover:border-primary-200 hover:shadow-lg hover:shadow-primary-100/50">
-            <div class="mb-4 inline-flex rounded-xl bg-primary-50 p-3 text-primary-600 transition-colors group-hover:bg-primary-100">
-              <Fragment set:html={feature.icon} />
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <div class="group relative rounded-2xl border border-slate-100 bg-white p-7 transition-all duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-amber-100/40">
+            <div class="mb-5 inline-flex rounded-xl bg-gradient-to-br from-amber-50 to-amber-100/50 p-3 text-amber-600 ring-1 ring-amber-200/50">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <Fragment set:html={icons[f.icon]} />
+              </svg>
             </div>
-            <h3 class="text-lg font-semibold text-surface-900">{feature.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-surface-500">{feature.description}</p>
+            <h3 class="text-[15px] font-bold text-slate-900">{f.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-500">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -142,84 +168,51 @@ const platforms = [
   </section>
 
   <!-- How it works -->
-  <section class="border-t border-surface-100 bg-surface-50 py-20 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+  <section id="how-it-works" class="border-t border-slate-100 bg-slate-50 py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-surface-900 sm:text-4xl">
-          Up and running in 3 steps
+        <p class="text-sm font-semibold uppercase tracking-widest text-amber-600">How it works</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          Three steps. That's it.
         </h2>
       </div>
 
-      <div class="mt-16 grid gap-8 md:grid-cols-3">
-        <div class="text-center">
-          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600 text-xl font-bold text-white shadow-lg shadow-primary-600/25">
-            1
+      <div class="mx-auto mt-16 grid max-w-4xl gap-10 md:grid-cols-3">
+        {steps.map((s, i) => (
+          <div class="relative text-center">
+            {i < steps.length - 1 && (
+              <div class="absolute top-8 left-[60%] hidden h-px w-[80%] bg-gradient-to-r from-amber-300 to-transparent md:block"></div>
+            )}
+            <div class="relative mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 text-xl font-extrabold text-white shadow-lg shadow-amber-500/30">
+              {s.num}
+            </div>
+            <h3 class="mt-5 text-[15px] font-bold text-slate-900">{s.title}</h3>
+            <p class="mt-2 text-sm text-slate-500">{s.desc}</p>
           </div>
-          <h3 class="mt-5 text-lg font-semibold text-surface-900">Create a form endpoint</h3>
-          <p class="mt-2 text-sm text-surface-500">
-            Sign up and create a new form in your dashboard. You'll get a unique endpoint URL.
-          </p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600 text-xl font-bold text-white shadow-lg shadow-primary-600/25">
-            2
-          </div>
-          <h3 class="mt-5 text-lg font-semibold text-surface-900">Point your form</h3>
-          <p class="mt-2 text-sm text-surface-500">
-            Set your form's action attribute to your endpoint. That's it. No JavaScript required.
-          </p>
-        </div>
-        <div class="text-center">
-          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-600 text-xl font-bold text-white shadow-lg shadow-primary-600/25">
-            3
-          </div>
-          <h3 class="mt-5 text-lg font-semibold text-surface-900">Receive submissions</h3>
-          <p class="mt-2 text-sm text-surface-500">
-            Get notified via email, Slack, or webhooks. View and export data from your dashboard.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Platforms -->
-  <section id="integrations" class="border-t border-surface-100 bg-white py-20 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-surface-900 sm:text-4xl">
-          Works with every platform
-        </h2>
-        <p class="mt-4 text-lg text-surface-500">
-          If it can render HTML, it works with ContactFormAPI.
-        </p>
-      </div>
-
-      <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
-        {platforms.map((platform) => (
-          <span class="rounded-full border border-surface-200 bg-surface-50 px-5 py-2.5 text-sm font-medium text-surface-700 transition-colors hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700">
-            {platform}
-          </span>
         ))}
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="border-t border-surface-100 bg-gradient-to-b from-surface-900 to-surface-950 py-20 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+  <section class="relative overflow-hidden bg-navy-950 py-24 sm:py-32">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(251,191,36,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(251,191,36,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px] bg-amber-500/5 rounded-full blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Start collecting submissions today
+        <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+          Ready to stop building form backends?
         </h2>
-        <p class="mt-4 text-lg text-surface-400">
-          Free plan included. No credit card required. Set up in under a minute.
+        <p class="mt-4 text-lg text-slate-400">
+          Free plan included. Set up in under 60 seconds. No credit card.
         </p>
         <a
           href="https://app.contactformapi.com/register"
-          class="mt-8 inline-flex items-center rounded-xl bg-primary-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary-600/25 transition-all hover:bg-primary-500 hover:shadow-xl"
+          class="group mt-8 inline-flex items-center gap-2 rounded-xl bg-amber-500 px-8 py-4 text-[15px] font-semibold text-navy-950 shadow-xl shadow-amber-500/20 transition-all hover:bg-amber-400 hover:shadow-2xl"
         >
-          Get started for free
-          <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          Get started free
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
         </a>

@@ -1,12 +1,11 @@
 ---
-const currentYear = new Date().getFullYear();
+const year = new Date().getFullYear();
 
-const footerLinks = {
+const links = {
   Product: [
     { label: "Features", href: "/#features" },
     { label: "Pricing", href: "/pricing" },
     { label: "Documentation", href: "/docs" },
-    { label: "Integrations", href: "/#integrations" },
   ],
   Resources: [
     { label: "Blog", href: "/blog" },
@@ -21,26 +20,28 @@ const footerLinks = {
 };
 ---
 
-<footer class="border-t border-surface-200 bg-surface-50">
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+<footer class="border-t border-white/5 bg-navy-950">
+  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+    <div class="grid grid-cols-2 gap-10 md:grid-cols-4">
       <div class="col-span-2 md:col-span-1">
-        <a href="/" class="flex items-center gap-2 text-lg font-bold text-surface-900">
-          <img src="/contactformapilogo.svg" alt="ContactFormAPI Logo" class="h-7 w-7" />
-          ContactFormAPI
+        <a href="/" class="flex items-center gap-2.5">
+          <img src="/contactformapilogo.svg" alt="ContactFormAPI" class="h-7 w-7" />
+          <span class="text-base font-bold text-white">
+            Contact<span class="text-amber-400">Form</span>API
+          </span>
         </a>
-        <p class="mt-3 text-sm leading-relaxed text-surface-500">
-          The simplest way to handle contact form submissions. No backend needed.
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
+          The simplest form backend. Handle submissions, filter spam, send notifications.
         </p>
       </div>
 
-      {Object.entries(footerLinks).map(([category, links]) => (
+      {Object.entries(links).map(([cat, items]) => (
         <div>
-          <h3 class="text-sm font-semibold text-surface-900">{category}</h3>
-          <ul class="mt-3 space-y-2">
-            {links.map((link) => (
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-400">{cat}</h3>
+          <ul class="mt-4 space-y-2.5">
+            {items.map((link) => (
               <li>
-                <a href={link.href} class="text-sm text-surface-500 transition-colors hover:text-surface-900">
+                <a href={link.href} class="text-sm text-slate-500 transition-colors hover:text-amber-400">
                   {link.label}
                 </a>
               </li>
@@ -50,9 +51,9 @@ const footerLinks = {
       ))}
     </div>
 
-    <div class="mt-10 border-t border-surface-200 pt-6">
-      <p class="text-center text-sm text-surface-400">
-        &copy; {currentYear} ContactFormAPI. All rights reserved.
+    <div class="mt-12 border-t border-white/5 pt-6">
+      <p class="text-center text-xs text-slate-600">
+        &copy; {year} ContactFormAPI. All rights reserved.
       </p>
     </div>
   </div>

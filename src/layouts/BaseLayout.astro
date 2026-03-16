@@ -6,26 +6,32 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
   description?: string;
+  dark?: boolean;
 }
 
-const { title, description = "The simplest way to handle contact form submissions. No backend needed." } = Astro.props;
-const fullTitle = title === "Home" ? "ContactFormAPI — Form Backend as a Service" : `${title} — ContactFormAPI`;
+const {
+  title,
+  description = "The simplest way to handle contact form submissions. No backend needed.",
+  dark = false,
+} = Astro.props;
+const fullTitle = title === "Home"
+  ? "ContactFormAPI — Form Backend as a Service"
+  : `${title} — ContactFormAPI`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/contactformapilogo.png" />
-    <link rel="icon" type="image/svg+xml" href="/contactformapilogo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>{fullTitle}</title>
   </head>
-  <body class="min-h-screen bg-white text-surface-900 antialiased flex flex-col">
+  <body class={`min-h-screen antialiased flex flex-col ${dark ? "bg-navy-950 text-white" : "bg-white text-slate-900"}`}>
     <Header />
     <main class="flex-1">
       <slot />
