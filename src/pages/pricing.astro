@@ -109,14 +109,16 @@ const faqs = [
                 )}
 
                 <a
-                  href="https://app.contactformapi.com/register"
+                  href={price?.amount_type === "free" || (price?.price_amount ?? 0) === 0
+                    ? "https://app.contactformapi.com/register"
+                    : `https://app.contactformapi.com/checkout?product_id=${encodeURIComponent(product.id)}`}
                   class={`mt-auto inline-flex w-full items-center justify-center rounded-full px-5 py-2.5 text-[13px] font-medium transition-colors ${
                     pop
                       ? "bg-white text-gray-900 hover:bg-gray-100"
                       : "bg-gray-900 text-white hover:bg-gray-800"
                   }`}
                 >
-                  Get started
+                  {price?.amount_type === "free" || (price?.price_amount ?? 0) === 0 ? "Get started" : "Subscribe"}
                 </a>
               </div>
             );
