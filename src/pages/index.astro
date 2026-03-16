@@ -186,17 +186,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </p>
         </div>
 
-        <div class="overflow-hidden rounded-[1.5rem] shadow-xl shadow-amber-900/8 ring-1 ring-gray-900/5">
-          <video
-            autoplay
-            loop
-            muted
-            playsinline
-            class="w-full h-auto block"
-          >
-            <source src="/ContactFormAPI.mp4" type="video/mp4" />
-          </video>
+        <div class="rounded-[1.5rem] bg-gray-950 p-6 overflow-hidden">
+          <p class="text-[11px] font-mono text-gray-600 uppercase tracking-wider mb-4">contact.html</p>
+          <pre class="text-[13px] leading-[1.8] font-mono overflow-x-auto"><code><span class="text-gray-600">&lt;</span><span class="text-amber-400">form</span>
+  <span class="text-gray-400">action</span><span class="text-gray-600">=</span><span class="text-emerald-400">"https://api.contactformapi.com/f/ID"</span>
+  <span class="text-gray-400">method</span><span class="text-gray-600">=</span><span class="text-emerald-400">"POST"</span><span class="text-gray-600">&gt;</span>
+
+  <span class="text-gray-600">&lt;</span><span class="text-amber-400">input</span> <span class="text-gray-400">type</span><span class="text-gray-600">=</span><span class="text-emerald-400">"email"</span> <span class="text-gray-400">name</span><span class="text-gray-600">=</span><span class="text-emerald-400">"email"</span> <span class="text-gray-600">/&gt;</span>
+  <span class="text-gray-600">&lt;</span><span class="text-amber-400">textarea</span> <span class="text-gray-400">name</span><span class="text-gray-600">=</span><span class="text-emerald-400">"message"</span><span class="text-gray-600">&gt;&lt;/</span><span class="text-amber-400">textarea</span><span class="text-gray-600">&gt;</span>
+  <span class="text-gray-600">&lt;</span><span class="text-amber-400">button</span><span class="text-gray-600">&gt;</span><span class="text-white">Send</span><span class="text-gray-600">&lt;/</span><span class="text-amber-400">button</span><span class="text-gray-600">&gt;</span>
+
+<span class="text-gray-600">&lt;/</span><span class="text-amber-400">form</span><span class="text-gray-600">&gt;</span></code></pre>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO SHOWCASE ============ -->
+  <section class="px-3 sm:px-4 pb-16 sm:pb-24">
+    <div class="mx-auto max-w-[1400px]">
+      <div class="text-center mb-8">
+        <p class="text-[12px] font-medium uppercase tracking-widest text-gray-400 mb-2">See it in action</p>
+        <h2 class="text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-gray-900">
+          How ContactFormAPI works
+        </h2>
+      </div>
+      <div class="overflow-hidden rounded-[1.5rem] shadow-2xl shadow-amber-900/8 ring-1 ring-gray-900/5">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="w-full h-auto block"
+        >
+          <source src="/ContactFormAPI.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </section>
