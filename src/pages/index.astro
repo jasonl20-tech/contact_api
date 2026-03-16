@@ -3,15 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Home">
-  <!-- ============ HERO (full-width visual + centered text) ============ -->
+  <!-- ============ HERO (video background + centered text overlay) ============ -->
   <section class="relative pt-14">
     <div class="relative mx-auto max-w-[1400px] px-3 sm:px-4">
-      <div class="relative overflow-hidden rounded-b-[2rem] bg-gradient-to-b from-amber-50 via-orange-50 to-amber-100">
-        <!-- Decorative shapes -->
-        <div class="absolute top-12 left-1/2 -translate-x-1/2 h-[300px] w-[500px] rounded-full bg-amber-200/30 blur-[80px]"></div>
-        <div class="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-amber-300/20 blur-3xl"></div>
-        <div class="absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-orange-200/30 blur-3xl"></div>
+      <div class="relative overflow-hidden rounded-b-[2rem]">
+        <!-- Video background -->
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/ContactFormAPI.mp4" type="video/mp4" />
+        </video>
 
+        <!-- Text overlay -->
         <div class="relative flex flex-col items-center px-6 pt-20 pb-28 sm:pt-28 sm:pb-36 text-center">
           <span class="mb-5 text-amber-700/60 text-lg">+</span>
           <h1 class="text-[clamp(2rem,5.5vw,3.5rem)] font-bold leading-[1.1] tracking-[-0.02em] text-gray-900">
@@ -27,23 +34,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Try it now
           </a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VIDEO SHOWCASE ============ -->
-  <section class="px-3 sm:px-4 pt-12 sm:pt-16 pb-14 sm:pb-20">
-    <div class="mx-auto max-w-[1400px]">
-      <div class="relative overflow-hidden rounded-[1.5rem] shadow-2xl shadow-amber-900/8 ring-1 ring-gray-900/5">
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="w-full h-auto block"
-        >
-          <source src="/ContactFormAPI.mp4" type="video/mp4" />
-        </video>
       </div>
     </div>
   </section>
