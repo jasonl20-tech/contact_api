@@ -14,55 +14,57 @@ try {
 ---
 
 <BaseLayout title="Blog" description="Guides, updates, and best practices from ContactFormAPI.">
-  <section class="bg-navy-950 pt-32 pb-16 sm:pt-40 sm:pb-20">
-    <div class="mx-auto max-w-7xl px-5 sm:px-8 text-center">
-      <p class="text-sm font-semibold uppercase tracking-widest text-amber-400">Blog</p>
-      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-        Guides & Updates
-      </h1>
-      <p class="mx-auto mt-4 max-w-lg text-lg text-slate-400">
-        Tips, tutorials, and news about form handling.
-      </p>
+  <section class="px-5 pt-20 pb-16 sm:pt-28 sm:pb-20">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-xl">
+        <p class="text-[13px] font-medium text-brand-600 mb-3">Blog</p>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+          Guides & Updates
+        </h1>
+        <p class="mt-4 text-base text-gray-500">
+          Tips, tutorials, and news about form handling.
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="bg-white py-16 sm:py-24">
-    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+  <section class="px-5 pb-16 sm:pb-24">
+    <div class="mx-auto max-w-6xl">
       {error && (
-        <div class="mx-auto mb-8 max-w-md rounded-xl border border-amber-200 bg-amber-50 p-4 text-center text-sm text-amber-800">
+        <div class="mb-8 rounded-2xl border border-brand-200 bg-brand-50 p-4 text-sm text-brand-800 max-w-md">
           {error}
         </div>
       )}
 
       {posts.length > 0 ? (
-        <div class="grid gap-8 md:grid-cols-2">
+        <div class="grid gap-4 md:grid-cols-2">
           {posts.map((post: any) => {
             const f = post.fields as any;
             return (
               <a
                 href={`/blog/${f.slug}`}
-                class="group overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-amber-100/30"
+                class="group rounded-3xl border border-gray-100 bg-white overflow-hidden transition-all hover:shadow-md"
               >
                 {f.featuredImage && (
-                  <div class="aspect-video overflow-hidden bg-slate-50">
+                  <div class="aspect-video overflow-hidden bg-gray-50">
                     <img
                       src={`https:${f.featuredImage.fields.file.url}?w=600&h=340&fit=fill`}
                       alt={f.featuredImage.fields.title || ""}
-                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                   </div>
                 )}
                 <div class="p-6">
-                  <time class="text-xs font-semibold uppercase tracking-wider text-amber-600">
+                  <time class="text-[11px] font-medium uppercase tracking-widest text-brand-600">
                     {new Date(f.publishedDate).toLocaleDateString("en-US", {
                       year: "numeric", month: "long", day: "numeric",
                     })}
                   </time>
-                  <h2 class="mt-2 text-lg font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
+                  <h2 class="mt-2 text-[15px] font-semibold text-gray-900 group-hover:text-brand-700 transition-colors">
                     {f.title}
                   </h2>
-                  <p class="mt-2 text-sm leading-relaxed text-slate-500 line-clamp-3">
+                  <p class="mt-1.5 text-[13px] leading-relaxed text-gray-500 line-clamp-2">
                     {f.excerpt}
                   </p>
                 </div>
@@ -71,8 +73,8 @@ try {
           })}
         </div>
       ) : !error && (
-        <div class="text-center py-12">
-          <p class="text-slate-400 text-lg">No blog posts yet. Check back soon!</p>
+        <div class="rounded-3xl bg-gray-50 border border-gray-100 p-12 text-center">
+          <p class="text-gray-400">No blog posts yet. Check back soon!</p>
         </div>
       )}
     </div>

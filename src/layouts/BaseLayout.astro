@@ -6,13 +6,11 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
   description?: string;
-  dark?: boolean;
 }
 
 const {
   title,
   description = "The simplest way to handle contact form submissions. No backend needed.",
-  dark = false,
 } = Astro.props;
 const fullTitle = title === "Home"
   ? "ContactFormAPI — Form Backend as a Service"
@@ -20,7 +18,7 @@ const fullTitle = title === "Home"
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,10 +26,10 @@ const fullTitle = title === "Home"
     <link rel="icon" type="image/png" href="/contactformapilogo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>{fullTitle}</title>
   </head>
-  <body class={`min-h-screen antialiased flex flex-col ${dark ? "bg-navy-950 text-white" : "bg-white text-slate-900"}`}>
+  <body class="min-h-screen bg-white text-gray-900 antialiased flex flex-col">
     <Header />
     <main class="flex-1">
       <slot />
