@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 transition-transform duration-300">
   <div class="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-3 sm:px-4">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2">
@@ -26,12 +26,18 @@ const navLinks = [
     </nav>
 
     <!-- CTA -->
-    <div class="hidden sm:block">
+    <div class="hidden sm:flex items-center gap-2.5">
+      <a
+        href="https://app.contactformapi.com/login"
+        class="rounded-full border border-gray-200 px-4 py-2 text-[13px] font-medium text-gray-700 hover:border-gray-300 hover:text-gray-900 transition-colors"
+      >
+        Login
+      </a>
       <a
         href="https://app.contactformapi.com/register"
         class="rounded-full bg-gray-900 px-5 py-2 text-[13px] font-medium text-white hover:bg-gray-800 transition-colors"
       >
-        Launch App
+        Register
       </a>
     </div>
 
@@ -47,13 +53,39 @@ const navLinks = [
       {navLinks.map((link) => (
         <a href={link.href} class="block py-2 text-[14px] text-gray-500 hover:text-gray-900">{link.label}</a>
       ))}
-      <a href="https://app.contactformapi.com/register" class="mt-3 block rounded-full bg-gray-900 px-5 py-2.5 text-center text-[14px] font-medium text-white">Launch App</a>
+      <div class="mt-3 flex items-center gap-2">
+        <a href="https://app.contactformapi.com/login" class="block flex-1 rounded-full border border-gray-200 px-4 py-2.5 text-center text-[14px] font-medium text-gray-700">Login</a>
+        <a href="https://app.contactformapi.com/register" class="block flex-1 rounded-full bg-gray-900 px-4 py-2.5 text-center text-[14px] font-medium text-white">Register</a>
+      </div>
     </div>
   </div>
 </header>
 
 <script>
-  document.getElementById("mobile-menu-btn")?.addEventListener("click", () => {
-    document.getElementById("mobile-menu")?.classList.toggle("hidden");
+  const header = document.getElementById("site-header");
+  const menu = document.getElementById("mobile-menu");
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  let lastY = window.scrollY;
+
+  menuBtn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
   });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!header) return;
+      const currentY = window.scrollY;
+      const menuOpen = menu && !menu.classList.contains("hidden");
+
+      if (menuOpen || currentY < 20 || currentY < lastY) {
+        header.classList.remove("-translate-y-full");
+      } else if (currentY > lastY && currentY > 80) {
+        header.classList.add("-translate-y-full");
+      }
+
+      lastY = currentY;
+    },
+    { passive: true }
+  );
 </script>
