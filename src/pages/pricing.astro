@@ -102,7 +102,7 @@ const faqs = [
                         <svg class={`mt-0.5 h-3.5 w-3.5 shrink-0 ${pop ? "text-brand-400" : "text-brand-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
-                        {b.description}
+                        {b.description || b.type || "Included"}
                       </li>
                     ))}
                   </ul>

@@ -46,6 +46,59 @@ export interface PolarBenefit {
   type: string;
 }
 
+function normalizeBenefits(raw: any): PolarBenefit[] {
+  const source = Array.isArray(raw?.benefits)
+    ? raw.benefits
+    : Array.isArray(raw?.attached_benefits)
+      ? raw.attached_benefits
+      : [];
+
+  return source
+    .map((entry: any, index: number) => {
+      const benefit = entry?.benefit ?? entry;
+      const description =
+        benefit?.description ??
+        benefit?.name ??
+        benefit?.title ??
+        entry?.description ??
+        "";
+
+      if (!description) return null;
+      return {
+        id: String(benefit?.id ?? entry?.id ?? `${raw?.id ?? "product"}-benefit-${index}`),
+        description: String(description),
+        type: String(benefit?.type ?? entry?.type ?? "feature"),
+      } as PolarBenefit;
+    })
+    .filter(Boolean) as PolarBenefit[];
+}
+
+function normalizePrices(raw: any): PolarPrice[] {
+  const prices = Array.isArray(raw?.prices) ? raw.prices : [];
+  return prices.map((p: any, index: number) => ({
+    id: String(p?.id ?? `${raw?.id ?? "product"}-price-${index}`),
+    type: p?.type === "one_time" ? "one_time" : "recurring",
+    amount_type: p?.amount_type ?? "fixed",
+    price_amount: typeof p?.price_amount === "number" ? p.price_amount : null,
+    price_currency: String(p?.price_currency ?? "USD"),
+    recurring_interval: p?.recurring_interval,
+  }));
+}
+
+function normalizeProduct(raw: any): PolarProduct {
+  return {
+    id: String(raw?.id ?? ""),
+    name: String(raw?.name ?? "Plan"),
+    description: raw?.description ? String(raw.description) : null,
+    is_recurring: Boolean(
+      raw?.is_recurring || (Array.isArray(raw?.prices) && raw.prices.some((p: any) => p?.type === "recurring"))
+    ),
+    is_archived: Boolean(raw?.is_archived),
+    prices: normalizePrices(raw),
+    benefits: normalizeBenefits(raw),
+  };
+}
+
 export async function getProducts(): Promise<PolarProduct[]> {
   const token = import.meta.env.POLAR_ACCESS_TOKEN;
   const orgId = import.meta.env.POLAR_ORGANIZATION_ID;
@@ -86,11 +139,12 @@ export async function getProducts(): Promise<PolarProduct[]> {
     pageGuard += 1;
   }
 
-  const recurring = products.filter(
+  const normalized = products.map(normalizeProduct);
+  const recurring = normalized.filter(
     (p) => p.is_recurring || p.prices?.some((price) => price.type === "recurring")
   );
 
-  return recurring.length > 0 ? recurring : products;
+  return recurring.length > 0 ? recurring : normalized;
 }
 
 export function formatPrice(price: PolarPrice): string {
