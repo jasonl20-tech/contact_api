@@ -50,7 +50,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <!-- Right -->
         <div class="md:pt-2">
           <p class="text-[15px] leading-[1.7] text-gray-500">
-            ContactFormAPI is a form backend service that collects your HTML form submissions and delivers them via email, Slack, or webhooks. It handles spam filtering, file uploads, and notifications — so you never need to build a form backend again.
+            ContactFormAPI collects your HTML form submissions and delivers them to 20+ integrations — Email, Slack, Discord, Notion, Google Sheets, Zapier, HubSpot, Telegram, and many more. It handles spam filtering, file uploads, and notifications — so you never need to build a form backend again.
           </p>
         </div>
       </div>
@@ -97,19 +97,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <!-- ============ PLATFORM LOGOS STRIP ============ -->
-  <section id="integrations" class="px-3 sm:px-4 pb-14 sm:pb-20">
+  <!-- ============ INTEGRATIONS ============ -->
+  <section id="integrations" class="px-3 sm:px-4 pb-16 sm:pb-24">
     <div class="mx-auto max-w-[1400px]">
-      <p class="text-[13px] text-gray-400 mb-5">
-        Supported by the best frameworks<br class="sm:hidden" /> and trusted by developers everywhere.
-      </p>
-      <div class="flex flex-wrap items-center gap-x-8 gap-y-3">
-        {["React", "Next.js", "Vue", "Svelte", "Astro", "WordPress", "Webflow", "Framer", "Nuxt", "Hugo"].map((name) => (
-          <span class="text-[13px] font-medium text-gray-300 hover:text-gray-500 transition-colors cursor-default">
-            {name}
-          </span>
+      <div class="mb-10">
+        <p class="text-[12px] font-medium uppercase tracking-widest text-gray-400 mb-2">Integrations</p>
+        <h2 class="text-[clamp(1.75rem,4vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-gray-900">
+          Deliver submissions<br />everywhere you work
+        </h2>
+        <p class="mt-4 text-[15px] leading-[1.7] text-gray-500 max-w-lg">
+          Every form submission is routed to the tools your team already uses — instantly, reliably, with zero setup.
+        </p>
+      </div>
+
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { name: "Email", desc: "Inbox notifications with full submission data" },
+          { name: "Slack", desc: "Real-time alerts in any channel" },
+          { name: "Discord", desc: "Webhook messages to your server" },
+          { name: "Webhooks", desc: "POST to any URL or custom endpoint" },
+          { name: "Zapier", desc: "Connect to 6,000+ apps automatically" },
+          { name: "Make", desc: "Build powerful automation workflows" },
+          { name: "n8n", desc: "Self-hosted workflow automation" },
+          { name: "Notion", desc: "Auto-populate databases with entries" },
+          { name: "Google Sheets", desc: "Append rows to your spreadsheet" },
+          { name: "Airtable", desc: "Sync submissions to your base" },
+          { name: "Telegram", desc: "Instant bot notifications" },
+          { name: "Microsoft Teams", desc: "Alerts in your Teams channels" },
+          { name: "HubSpot", desc: "Create contacts & deals from forms" },
+          { name: "Salesforce", desc: "Push leads directly to your CRM" },
+          { name: "Mailchimp", desc: "Add subscribers from form entries" },
+          { name: "Trello", desc: "Create cards from submissions" },
+          { name: "Jira", desc: "Turn form data into tickets" },
+          { name: "Linear", desc: "Create issues from feedback forms" },
+          { name: "Pagerduty", desc: "Trigger incidents from urgent forms" },
+          { name: "Supabase", desc: "Insert rows into your database" },
+        ].map((integration) => (
+          <div class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white/70 p-5 hover:border-amber-200 hover:bg-amber-50/40 transition-all">
+            <h3 class="text-[15px] font-semibold text-gray-900 group-hover:text-amber-800 transition-colors">{integration.name}</h3>
+            <p class="mt-1 text-[12px] leading-relaxed text-gray-400">{integration.desc}</p>
+          </div>
         ))}
       </div>
+
+      <p class="mt-6 text-[13px] text-gray-400">
+        Plus custom webhooks to connect to any service — if it has an API, ContactFormAPI can reach it.
+      </p>
     </div>
   </section>
 
