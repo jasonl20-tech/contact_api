@@ -8,6 +8,17 @@ export interface PolarProduct {
   benefits: PolarBenefit[];
 }
 
+interface PolarListResponse {
+  items?: PolarProduct[];
+  result?: {
+    items?: PolarProduct[];
+  };
+  pagination?: {
+    next_cursor?: string | null;
+  };
+  next_cursor?: string | null;
+}
+
 export interface PolarPrice {
   id: string;
   type: "one_time" | "recurring";
@@ -29,24 +40,42 @@ export async function getProducts(): Promise<PolarProduct[]> {
 
   if (!token || !orgId) return [];
 
-  const url = new URL("https://api.polar.sh/v1/products/");
-  url.searchParams.set("organization_id", orgId);
-  url.searchParams.set("is_archived", "false");
+  // Build-time fetch for static pricing page.
+  // We fetch recurring subscription products and follow pagination.
+  const products: PolarProduct[] = [];
+  let cursor: string | null = null;
+  let pageGuard = 0;
 
-  const response = await fetch(url.toString(), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-    },
-  });
+  while (pageGuard < 20) {
+    const url = new URL("https://api.polar.sh/v1/products/");
+    url.searchParams.set("organization_id", orgId);
+    url.searchParams.set("is_archived", "false");
+    url.searchParams.set("is_recurring", "true");
+    url.searchParams.set("limit", "100");
+    if (cursor) url.searchParams.set("cursor", cursor);
 
-  if (!response.ok) {
-    console.error("Polar API error:", response.status, await response.text());
-    return [];
+    const response = await fetch(url.toString(), {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      console.error("Polar API error:", response.status, await response.text());
+      return [];
+    }
+
+    const data = (await response.json()) as PolarListResponse;
+    const pageItems = data.items ?? data.result?.items ?? [];
+    products.push(...pageItems);
+
+    cursor = data.pagination?.next_cursor ?? data.next_cursor ?? null;
+    if (!cursor) break;
+    pageGuard += 1;
   }
 
-  const data = await response.json();
-  return data.items ?? [];
+  return products;
 }
 
 export function formatPrice(price: PolarPrice): string {

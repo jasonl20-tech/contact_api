@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getProducts, formatPrice, type PolarProduct, type PolarPrice } from "../lib/polar";
 
+export const prerender = true;
+
 let products: PolarProduct[] = [];
 let error: string | null = null;
 
@@ -121,7 +123,7 @@ const faqs = [
           })}
         </div>
       ) : !error && (
-        <p class="text-gray-400">Plans loading...</p>
+        <p class="text-gray-400">No subscription plans found in Polar.</p>
       )}
     </div>
   </section>
