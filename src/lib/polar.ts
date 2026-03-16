@@ -27,6 +27,8 @@ export async function getProducts(): Promise<PolarProduct[]> {
   const token = import.meta.env.POLAR_ACCESS_TOKEN;
   const orgId = import.meta.env.POLAR_ORGANIZATION_ID;
 
+  if (!token || !orgId) return [];
+
   const url = new URL("https://api.polar.sh/v1/products/");
   url.searchParams.set("organization_id", orgId);
   url.searchParams.set("is_archived", "false");

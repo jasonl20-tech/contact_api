@@ -1,15 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getBlogPostBySlug } from "../../lib/contentful";
+import { getBlogPosts, getBlogPostBySlug } from "../../lib/contentful";
 import { renderRichText } from "../../lib/rich-text";
 
-const { slug } = Astro.params;
-
-if (!slug) {
-  return Astro.redirect("/blog");
+export async function getStaticPaths() {
+  let posts: any[] = [];
+  try {
+    posts = await getBlogPosts();
+  } catch {
+    return [];
+  }
+  return posts.map((post: any) => ({
+    params: { slug: post.fields.slug },
+  }));
 }
 
-const post = await getBlogPostBySlug(slug);
+const { slug } = Astro.params;
+const post = await getBlogPostBySlug(slug!);
 
 if (!post) {
   return Astro.redirect("/blog");

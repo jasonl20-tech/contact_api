@@ -5,13 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/fix-wrangler-output.mjs",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.7",
-    "@astrojs/cloudflare": "^13.1.1",
     "@contentful/rich-text-html-renderer": "^16.6.9",
     "@contentful/rich-text-types": "^16.8.5",
     "@tailwindcss/vite": "^4.2.1",

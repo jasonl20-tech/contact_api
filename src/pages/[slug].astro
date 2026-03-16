@@ -1,23 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getPageBySlug } from "../lib/contentful";
+import { getPages, getPageBySlug } from "../lib/contentful";
 import { renderRichText } from "../lib/rich-text";
 
+export async function getStaticPaths() {
+  let pages: any[] = [];
+  try {
+    pages = await getPages();
+  } catch {
+    return [];
+  }
+  return pages.map((page: any) => ({
+    params: { slug: page.fields.slug },
+  }));
+}
+
 const { slug } = Astro.params;
-
-if (!slug) {
-  return Astro.redirect("/");
-}
-
-const reservedSlugs = ["pricing", "blog"];
-if (reservedSlugs.includes(slug)) {
-  return Astro.redirect(`/${slug}`);
-}
-
-const page = await getPageBySlug(slug);
+const page = await getPageBySlug(slug!);
 
 if (!page) {
-  return new Response(null, { status: 404, statusText: "Not Found" });
+  return Astro.redirect("/");
 }
 
 const fields = page.fields as any;

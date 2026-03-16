@@ -1,12 +1,8 @@
 import { defineConfig } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  output: "server",
-  adapter: cloudflare({
-    imageService: "passthrough",
-  }),
+  site: "https://contactformapi.com",
   vite: {
     plugins: [tailwindcss()],
   },

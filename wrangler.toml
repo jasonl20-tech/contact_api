@@ -1,9 +1,0 @@
-name = "contactformapi-website"
-compatibility_date = "2026-03-12"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "./dist"
-
-[vars]
-# Non-sensitive variables can go here.
-# Sensitive variables (API keys) should be set via:
-# npx wrangler pages secret put VARIABLE_NAME
