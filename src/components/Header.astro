@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 transition-transform duration-300">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-amber-50/90 backdrop-blur-md border-b border-amber-100/80 transition-transform duration-300">
   <div class="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-3 sm:px-4">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2">
@@ -48,7 +48,7 @@ const navLinks = [
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden border-t border-gray-100 bg-white lg:hidden">
+  <div id="mobile-menu" class="hidden border-t border-amber-100/80 bg-amber-50/95 lg:hidden">
     <div class="px-3 sm:px-4 py-4 space-y-1">
       {navLinks.map((link) => (
         <a href={link.href} class="block py-2 text-[14px] text-gray-500 hover:text-gray-900">{link.label}</a>

@@ -29,7 +29,13 @@ const fullTitle = title === "Home"
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>{fullTitle}</title>
   </head>
-  <body class="min-h-screen bg-white text-gray-900 antialiased flex flex-col">
+  <body class="relative min-h-screen bg-gradient-to-b from-amber-50 via-orange-50/40 to-amber-50 text-gray-900 antialiased flex flex-col">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute top-24 left-1/2 h-[320px] w-[560px] -translate-x-1/2 rounded-full bg-amber-200/25 blur-[90px]"></div>
+      <div class="absolute top-[45%] -left-20 h-56 w-56 rounded-full bg-orange-200/20 blur-[80px]"></div>
+      <div class="absolute bottom-24 -right-24 h-64 w-64 rounded-full bg-amber-300/15 blur-[90px]"></div>
+    </div>
+
     <Header />
     <main class="flex-1">
       <slot />
